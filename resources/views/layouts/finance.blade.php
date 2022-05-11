@@ -12,12 +12,15 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
@@ -30,7 +33,6 @@
             <div class="flex flex-row items-center justify-between flex-shrink-0 px-8 py-4">
                 <a href="#"
                     class="mx-auto text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">
-                    {{-- <x-application-logo class="block h-10 w-auto fill-current text-gray-600" /> --}}
                     <h4 class="mt-1 text-1xl font-bold leading-7 text-gray-900 text-center ">
                         {{ config('app.name') }}</h4>
                 </a>
@@ -52,20 +54,23 @@
             </div>
             <nav :class="{ 'block': open, 'hidden': !open }"
                 class="flex-grow px-4 pb-4 md:block md:pb-0 md:overflow-y-auto">
-                <x-side-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                <x-side-link :href="route('finance.dashboard')" :active="request()->routeIs('finance.dashboard')">
                     {{ __('Dashboard') }}
                 </x-side-link>
-                <x-side-link :href="route('finance.dashboard')" :active="request()->routeIs('finance.dashboard')">
-                    {{ __('การเงิน') }}
+                <x-side-link :href="route('finance.revenue.create')" :active="request()->routeIs('finance.revenue.create')">
+                    {{ __('บันทึกรายรับ') }}
                 </x-side-link>
-                <x-side-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                    {{ __('บัญชี') }}
+                <x-side-link :href="route('finance.revenue.index')" :active="request()->routeIs('finance.revenue.index')">
+                    {{ __('จัดการรายรับ') }}
                 </x-side-link>
-                <x-side-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                    {{ __('ศูนย์จัดเก็บรายได้') }}
+                <x-side-link :href="route('finance.revenue.index')" :active="request()->routeIs('finance.revenue.index')">
+                    {{ __('รายงานรายรับ') }}
                 </x-side-link>
-                <x-side-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                    {{ __('แผนงานโรงพยาบาล') }}
+                <x-side-link :href="route('finance.revenue.index')" :active="request()->routeIs('finance.revenue.index')">
+                    {{ __('จัดการใบนำส่ง') }}
+                </x-side-link>
+                <x-side-link :href="route('finance.revenue.index')" :active="request()->routeIs('finance.revenue.index')">
+                    {{ __('รายงานการนำส่ง') }}
                 </x-side-link>
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">

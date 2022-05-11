@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RevenueController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,4 +22,20 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+Route::middleware(['auth'])->name('finance.')->prefix('finance')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('pages.finance.dashboard');
+    })->name('dashboard');
+    Route::resource('/revenue', RevenueController::class);
+});
+
+// Route::middleware(['auth', 'role:admin'])->name('admin')->prefix('admin')->group(function () {
+// });
+
+// Route::middleware(['auth', 'role:finance'])->name('finance')->group(function () {
+//     Route::resource('/')
+// });
+
+
+
+require __DIR__ . '/auth.php';
