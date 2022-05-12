@@ -31,29 +31,43 @@
             class="flex flex-col flex-shrink-0 w-full text-gray-700 bg-white md:w-64 dark-mode:text-gray-200 dark-mode:bg-gray-800"
             x-data="{ open: false }">
             <div class="flex flex-row items-center justify-between flex-shrink-0 px-8 py-4">
-                <a href="#"
-                    class="mx-auto text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">
-                    <h4 class="mt-1 text-1xl font-bold leading-7 text-gray-900 text-center ">
-                        {{ config('app.name') }}</h4>
-                </a>
-                <button class="rounded-lg md:hidden focus:outline-none focus:shadow-outline" @click="open = !open">
-                    <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
-                        <path x-show="!open" fill-rule="evenodd"
-                            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
-                            clip-rule="evenodd"></path>
-                        <path x-show="open" fill-rule="evenodd"
-                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                </button>
+                <div class="flex flex-row items-center justify-self-auto">
+                    <a href="/">
+                        <x-application-logo class="fill-current text-gray-500 w-16 md:w-32 lg:w-48" />
+                    </a>
+                </div>
+                <div class="md:hidden">
+                    <a href="{{ route('dashboard') }}"
+                        class="mx-auto text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">
+                        <h4 class="mt-1 text-1xl font-bold leading-7 text-gray-900 text-center ">
+                            {{ config('app.hotname') }}</h4>
+                    </a>
+                </div>
+                <div class="md:hidden">
+                    <button class="rounded-lg  focus:outline-none focus:shadow-outline" @click="open = !open">
+                        <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+                            <path x-show="!open" fill-rule="evenodd"
+                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                                clip-rule="evenodd"></path>
+                            <path x-show="open" fill-rule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
             <div class="relative flex items-center">
-                <div class="flex-grow border-t border-gray-300"></div>
-                <span class="flex-shrink mx-4 text-gray-300">รายการ</span>
-                <div class="flex-grow border-t border-gray-300"></div>
+                <div class="flex-grow border-t border-gray-300 hidden md:block"></div>
+                <span class="flex-shrink mx-4 text-gray-300 hidden md:block">รายการ</span>
+                <div class="flex-grow border-t border-gray-300 hidden md:block"></div>
             </div>
             <nav :class="{ 'block': open, 'hidden': !open }"
                 class="flex-grow px-4 pb-4 md:block md:pb-0 md:overflow-y-auto">
+                <div class="relative flex items-center block md:hidden">
+                    <div class="flex-grow border-t border-gray-300 block md:hidden"></div>
+                    <span class="flex-shrink mx-4 text-gray-300 block md:hidden">รายการ</span>
+                    <div class="flex-grow border-t border-gray-300 block md:hidden"></div>
+                </div>
                 <x-side-link :href="route('finance.dashboard')" :active="request()->routeIs('finance.dashboard')">
                     {{ __('Dashboard') }}
                 </x-side-link>
@@ -63,16 +77,28 @@
                 <x-side-link :href="route('finance.revenue.index')" :active="request()->routeIs('finance.revenue.index')">
                     {{ __('จัดการรายรับ') }}
                 </x-side-link>
-                <x-side-link :href="route('finance.revenue.index')" :active="request()->routeIs('finance.revenue.index')">
+                <x-side-link href="#" :active="false">
                     {{ __('รายงานรายรับ') }}
                 </x-side-link>
-                <x-side-link :href="route('finance.revenue.index')" :active="request()->routeIs('finance.revenue.index')">
+                <x-side-link href="#" :active="false">
                     {{ __('จัดการใบนำส่ง') }}
                 </x-side-link>
-                <x-side-link :href="route('finance.revenue.index')" :active="request()->routeIs('finance.revenue.index')">
+                <x-side-link href="#" :active="false">
                     {{ __('รายงานการนำส่ง') }}
                 </x-side-link>
-
+                <x-side-link href="#" :active="false" class="block md:hidden">
+                    {{ __('Profile') }}
+                </x-side-link>
+                <x-side-link href="#" :active="false" class="block md:hidden">
+                    {{ __('Setting') }}
+                </x-side-link>
+                <!-- Authentication -->
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <a class="block md:hidden px-4 py-2 my-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                        href="{{ route('logout') }}" onclick="event.preventDefault();
+                        this.closest('form').submit();">{{ __('Log Out') }}</a>
+                </form>
             </nav>
         </div>
 
@@ -83,12 +109,15 @@
                     {{ $header }}
                 </div>
             </header> --}}
-            <nav class="bg-gray-800 hidden sm:block">
+            <nav class="bg-gray-800 hidden md:block">
                 <div class="max-w-screen mr-auto px-2 sm:px-6 lg:px-8">
                     <div class="relative flex items-center justify-between h-16">
                         <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                             <div class="flex-shrink-0 flex items-center">
-                                {{ $header }}
+                                {{-- {{ $header }} --}}
+                                <h2 class="font-semibold text-xl text-gray-100 leading-tight">
+                                    {{ config('app.name') }} | {{ config('app.hotname') }}
+                                </h2>
                             </div>
                         </div>
                         <div
